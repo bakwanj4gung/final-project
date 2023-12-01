@@ -1,10 +1,39 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import React, { useState } from 'react'; // BUAT APA??
+import React, { useState, useEffect } from 'react'; // BUAT APA??
 import { Head } from '@inertiajs/react';
 import JavaScript from '@/Components/Scripts';
 
 
-export default function InputMingguan({ auth, surahs}) {
+export default function InputMingguan({ auth }) {
+
+    const [surahs, setSurahs] = useState([]);
+    const [selectedSurah, setSelectedSurah] = useState(null);
+    const [ayats, setAyat] = useState([]);
+
+    useEffect(() => {
+        fetch('https://equran.id/api/v2/surat')
+            .then(response => response.json())
+            .then(data => {
+                setSurahs(data.data);
+            });
+    }, []);
+
+    const handleSurahChange = (event) => {
+        setSelectedSurah(event.target.value);
+    };
+
+    useEffect(() => {
+        if (selectedSurah) {
+            fetch(`https://equran.id/api/v2/surat/${selectedSurah}`)
+                .then(response => response.json())
+                .then(data => {
+                    setAyat(data.data.ayat);
+                });
+        }
+    }, [selectedSurah]);
+
+    
+
     return (
         <>
         <Head title="Input Data Santri" /> {/* PENGEN Data Santri - Asisten Tahfidz */}
@@ -62,36 +91,22 @@ export default function InputMingguan({ auth, surahs}) {
                                         <div className="border-2 rounded-2xl py-5 px-4">
                                             <label for="awal_tasmi_pekanan" className="font-bold text-sm mb-3">Awal Tasmi'</label>
                                             <div className="grid grid-cols-3 gap-3">
-                                                <select id="awal_tasmi_pekanan" className="block col-span-2 pt-3 pb-2.5 px-4 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
-                                                    <option selected>Nama Surat</option>
-                                                    {surahs.data.map((surah,index) => (
-                                                    <option key={surah.nomor}>{surah.namaLatin}</option>
+                                                <select onChange={handleSurahChange} value={selectedSurah} id="awal_tasmi_pekanan" className="block col-span-2 pt-3 pb-2.5 px-4 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+                                                    <option selected>--Nama Surat--</option>
+                                                    {surahs.map((surah, index) => (
+                                                    <option key={surah.nomor} value={surah.nomor}>{surah.namaLatin}</option>
                                                     ))}
                                                 </select>
 
                                                 <select id="awal_tasmi_pekanan" className="block pt-3 pb-2.5 px-4 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
-                                                    <option selected>Ayat</option>
-                                                    <option >Ayat</option>
+                                                    <option selected>--Ayat--</option>
+                                                    {ayats.map((ayat, index) => (
+                                                        <option key={index} value={ayat.nomorAyat}>{ayat.nomorAyat}</option>
+                                                    ))}
                                                 </select>
                                                         
                                             </div>
                                         </div>  
-                                        <div className="border-2 rounded-2xl py-5 px-4">
-                                            <label for="underline_select" className="font-bold text-sm mb-3">Akhir Tasmi'</label>
-                                            <div className="grid grid-cols-3 gap-3">
-                                                <select id="underline_select" className="block col-span-2 pt-3 pb-2.5 px-4 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
-                                                    <option selected>Nama Surat</option>
-                                                    {surahs.data.map((surah,index) => (
-                                                    <option key={surah.nomor}>{surah.namaLatin}</option>
-                                                ))}
-                                                </select>
-                                                <select id="underline_select" className="block pt-3 pb-2.5 px-4 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
-                                                    <option selected>Ayat</option>
-                                                </select>
-                                            </div>
-                                        </div>  
-                                        
-                                        
                                     </div>
                                     <div className="flex justify-end">
                                         <button type="button" className="text-white tracking-wide border-2 border-blue-700 bg-blue-700 hover:bg-blue-100 hover:border-2  hover:text-blue-800 focus:ring-4 focus:ring-blue-300 font-semibold rounded-xl text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Simpan</button>

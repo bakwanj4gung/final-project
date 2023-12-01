@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('kamar', 30);
             $table->date('tgl_masuk');
             $table->foreignId('id_ustadz')->references('id')->on('ustadzs'); // Membuat relasi dengan kolom "id" di tabel "ustadzs"
-            $table->foreignId('id_halaqoh')->references('id')->on('halaqohs'); //Membuat relasi dengan kolom "id" di tabel "halaqohs"
+            $table->unsignedBigInteger('id_halaqoh')->nullable(); //Membuat relasi dengan kolom "id" di tabel "halaqohs"
             $table->timestamps();
         });
     }

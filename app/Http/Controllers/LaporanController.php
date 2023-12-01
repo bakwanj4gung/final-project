@@ -29,18 +29,20 @@ class LaporanController extends Controller
     
     public function getAyat($nomorSurat)
     {
-        try{
-        $ayatResponse = Http::get('https://equran.id/api/v2/surat/$nomorSurat');
-
-        if($ayatResponse->successful()){
-            return response()->json($ayatResponse->json());
-        }
-        else {
-            return response()->json(['error' => 'Failed to fetch ayat list.'], $ayatResponse->status());
-        }
-        } catch (Exception $e) 
-            {
-            return response()->json(['error' => $e->getMessage()], 500);
+        try {
+            $ayatResponse = Http::get("https://equran.id/api/v2/surat/$nomorSurat");
+    
+            if($ayatResponse->successful()){
+                return Inertia::render('Input/InputMingguan', [
+                    "ayats" => collect($ayatResponse->json()),
+                    "nomorSurat" => $nomorSurat
+                ]);
             }
+            else {
+                return response()->json(['error' => 'Failed to fetch ayat list.'], $ayatResponse->status());
+            }
+        } catch (Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 }

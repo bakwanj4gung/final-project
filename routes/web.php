@@ -41,6 +41,7 @@ Route::get('/input-asatidzah', [UstadzController::class, 'inputUstadz'])->middle
 
 Route::get('/input-mingguan', [LaporanController::class, 'inputMingguan'])->middleware(['auth', 'verified'])->name('inputmingguan');
 Route::get('/api/v2/surat', [ApiController::class, 'apiSatu'])->name('api.surah.list');
+Route::get('/get-ayat/{$nomorSurat}', [LaporanController::class, 'getAyat'])->name('get.ayat');
 
 
 Route::middleware('auth')->group(function () {
