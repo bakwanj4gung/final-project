@@ -18,11 +18,7 @@ return new class extends Migration
             $table->string('nama', 50);
             $table->string('jabatan', 100);
             $table->date('tgl_masuk');
-<<<<<<<< HEAD:database/migrations/2023_12_01_020813_create_ustadzs_table.php
             $table->foreignId('id_halaqoh')->references('id')->on('halaqohs')->nullable(); //Membuat relasi dengan kolom "id" di tabel "halaqohs"
-========
-            $table->unsignedBigInteger('id_halaqoh')->nullable();//Membuat relasi dengan kolom "id" di tabel "halaqohs"
->>>>>>>> 619cd923e6b8429df2dbfc2bd5001042374be50b:database/migrations/2023_11_10_111300_create_ustadzs_table.php
             $table->timestamps();
         });
     }
