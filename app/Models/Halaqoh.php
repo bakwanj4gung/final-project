@@ -9,7 +9,7 @@ class Halaqoh extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nama_halaqoh', 'id_ustadz', 'id_santri'];
+    protected $fillable = ['nama_halaqoh'];
 
     public function santris()
     {
@@ -21,14 +21,4 @@ class Halaqoh extends Model
         return $this->hasMany(Ustadz::class, 'id_halaqoh');
     }
 
-    //--------------------------------------------------------------
-    public function santri()
-    {
-        return $this->belongsTo(Santri::class,'id_santri');
-    }
-
-    public function ustadz() 
-    {
-        return $this->belongsTo(Ustadz::class,'id_ustadz');
-    }
 }

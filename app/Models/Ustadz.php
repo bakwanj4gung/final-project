@@ -12,10 +12,6 @@ class Ustadz extends Model
     protected $fillable = ['id_user', 'gambar', 'nama', 'jabatan', 'tgl_masuk', 'id_halaqoh'];
 
     //ID ustadz nyambung ke mana aja
-    public function halaqohs()
-    {
-        return $this->hasMany(Halaqoh::class, 'id_ustadz');
-    }
 
     public function artikels()
     {

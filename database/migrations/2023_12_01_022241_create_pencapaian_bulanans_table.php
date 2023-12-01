@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('awal_tasmi_bulanan');
             $table->string('akhir_tasmi_bulanan');
             $table->integer('total_halaman_bulanan');
-            $table->string('total_hafalan');
+            $table->float('total_hafalan');
             $table->string('murojaah');
             $table->timestamps();
         });

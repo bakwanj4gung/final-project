@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('kelas', 10);
             $table->string('kamar', 30);
             $table->date('tgl_masuk');
+            $table->string('hafalan_awal', 20)->default('An-Naba');
             $table->foreignId('id_ustadz')->references('id')->on('ustadzs'); // Membuat relasi dengan kolom "id" di tabel "ustadzs"
             $table->foreignId('id_halaqoh')->references('id')->on('halaqohs'); //Membuat relasi dengan kolom "id" di tabel "halaqohs"
             $table->timestamps();

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('nama', 50);
             $table->string('jabatan', 100);
             $table->date('tgl_masuk');
-            $table->foreignId('id_halaqoh')->references('id')->on('halaqohs'); //Membuat relasi dengan kolom "id" di tabel "halaqohs"
+            $table->foreignId('id_halaqoh')->references('id')->on('halaqohs')->nullable(); //Membuat relasi dengan kolom "id" di tabel "halaqohs"
             $table->timestamps();
         });
     }

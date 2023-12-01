@@ -13,10 +13,7 @@ class Santri extends Model
 
 
     //id santri dipake di table lain. Dan jadilah dia foreign key.
-    public function halaqohs() //PAKE S
-    {
-        return $this->hasMany(Halaqoh::class, 'id_santri');
-    }
+
     public function pencapaian_mingguans()
     {
         return $this->hasMany(Pencapaian_mingguan::class, 'id_santri');
@@ -41,7 +38,7 @@ class Santri extends Model
         return $this->belongsTo(Ustadz::class,'id_ustadz');
     }
 
-    public function halaqoh() {  //GA PAKE S
+    public function halaqoh() {
         return $this->belongsTo(Halaqoh::class,'id_halaqoh');
     }
 }

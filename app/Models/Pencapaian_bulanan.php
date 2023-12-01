@@ -9,7 +9,7 @@ class Pencapaian_bulanan extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id_santri', 'nama', 'kelas', 'bulan', 'awal_tasmi_bulanan', 'akhir_tasmi_bulanan', 'total_halaman_bulanan', 'total_hafalan', 'murojaah'];
+    protected $fillable = ['id_santri', 'bulan', 'awal_tasmi_bulanan', 'akhir_tasmi_bulanan', 'total_halaman_bulanan', 'total_hafalan', 'murojaah'];
 
     public function santris()
     {
